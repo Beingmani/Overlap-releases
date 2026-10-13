@@ -1,24 +1,110 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Overlap · Overlap</title><link rel="icon" href="icon.png"><style>
-@font-face { font-family:'DM Sans'; font-weight:400; font-display:swap; src:url(fonts/DMSans-Regular.ttf); }
-@font-face { font-family:'DM Sans'; font-weight:700; font-display:swap; src:url(fonts/DMSans-Bold.ttf); }
-:root { --bg:#fcfcfc; --card:#ffffff; --border:#e4e4e7; --fg:#27272a; --muted:#6f6f79; --accent:#1b4ed8; --soft:#e8eefc; }
-@media (prefers-color-scheme: dark) { :root { --bg:#0a0a0a; --card:#111111; --border:#222222; --fg:#f5f5f5; --muted:#8a8a8a; --accent:#6b93f6; --soft:#0f1a33; } }
-* { box-sizing: border-box; }
-html { background:var(--bg); }
-body { margin:0; min-height:100vh; background:linear-gradient(180deg, var(--soft), var(--bg) 340px) no-repeat; color:var(--fg); font:17px/1.65 'DM Sans', system-ui, sans-serif; }
-header { max-width:720px; margin:0 auto; padding:28px 24px 0; display:flex; align-items:center; gap:12px; }
-header img { width:36px; height:36px; } header a { color:var(--fg); text-decoration:none; font-weight:700; font-size:20px; }
-nav { margin-left:auto; display:flex; gap:6px; } nav a { font-size:15px; font-weight:700; padding:6px 14px; border-radius:999px; color:var(--muted); }
-nav a.on { background:var(--card); color:var(--accent); border:1px solid var(--border); }
-main { max-width:720px; margin:28px auto 64px; padding:32px 28px; background:var(--card); border:1px solid var(--border); border-radius:28px; }
-h1 { font-size:34px; line-height:1.15; margin:0 0 4px; letter-spacing:-0.5px; } h2 { font-size:19px; margin:28px 0 6px; }
-p, li { color:var(--fg); } em { color:var(--muted); font-style:normal; font-size:15px; }
-a { color:var(--accent); } ul { padding-left:20px; }
-.cards { display:grid; gap:12px; margin-top:20px; } .cards a { display:block; padding:18px 20px; border:1px solid var(--border); border-radius:20px; text-decoration:none; color:var(--fg); font-weight:700; }
-.cards span { display:block; font-weight:400; color:var(--muted); font-size:15px; }
-</style></head><body>
-<header><img src="icon.png" alt=""><a href="">Overlap</a><nav><a class="" href="privacy/">Privacy</a><a class="" href="terms/">Terms</a></nav></header><main><h1>Overlap</h1><p>See your friends’ local time, who’s awake, and the best hour to call.</p>
-<div class="cards"><a href="privacy/">Privacy Policy<span>No account, no ads, no tracking. Your data stays on your phone.</span></a>
-<a href="terms/">Terms of Use<span>The rules for using Overlap.</span></a>
-<a href="mailto:Vannan3926@gmail.com">Support<span>Vannan3926@gmail.com</span></a></div></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Overlap: your friends' time, at a glance</title>
+<meta name="description" content="A world clock for your friends. See their local time, who's awake right now, and the best hour to call. Free, no account, no ads.">
+<meta property="og:title" content="Overlap: your friends' time, at a glance">
+<meta property="og:description" content="See your friends' local time, who's awake, and the best hour to call.">
+<meta property="og:image" content="https://beingmani.github.io/Overlap-releases/og.png">
+<meta name="theme-color" content="#07080c">
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav"><a class="brand" href="./"><img src="icon.png" alt="">Overlap</a>
+      <div class="links"><a class="opt" href="#features">Features</a><a href="privacy/">Privacy</a><a href="support/">Support</a></div></nav>
+    <div class="hero-grid">
+      <div>
+        <span class="live"><b></b>The sun right now, on the real globe</span>
+        <h1>Know who’s <em>awake</em>, anywhere.</h1>
+        <p class="lede">Overlap shows your friends’ local time, where they are in their day, and the best hour to call.</p>
+        <div class="btns">
+          <a class="btn solid" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.5.8.9.6L20.6 13a1 1 0 0 0 0-1.9L4.9 2.2c-.4-.2-.9.1-.9.6z"/></svg><span><small>Get it on</small>Google Play</span></a>
+          <span class="btn ghost"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg><span><small>Coming soon to the</small>App Store</span></span>
+        </div>
+      </div>
+      <div class="stage"><canvas id="globe" width="600" height="600" aria-label="A globe showing where it is day and night right now, with friends pinned"></canvas><div id="pins"></div></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="wrap" id="features">
+    <div class="glance-head">
+      <div><span class="kicker">At a glance</span><h2>Everyone’s time, without the maths.</h2></div>
+      <p class="sub">Add the people you care about once. Overlap shows their time and whether they’re up, sorted west to east.</p>
+    </div>
+    <div class="clocks" id="clocks"></div>
+    <p class="note"><b>Live</b>These are the real times right now. Each card takes the colour of that friend’s part of the day.</p>
+  </section>
+
+  <section class="wrap">
+    <div class="plan-head">
+      <span class="kicker">Plan a call</span>
+      <h2>Find the hour that works for everyone.</h2>
+      <p class="sub">Pick a day and see everyone’s day side by side. Overlap picks out the times when the most people are awake.</p>
+    </div>
+    <div class="board">
+      <div class="bhead"><h3>Today, in your time</h3><div class="best">Best time to call <b id="best"></b></div></div>
+      <div class="lanes-grid" id="planner"></div>
+      <div class="legend" id="legend"></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <span class="kicker">And the rest</span>
+    <h2>Small things that save a bad call.</h2>
+    <div class="grid">
+      <div class="feat"><div class="icon" style="background:var(--evening-soft);color:var(--evening-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Time travel</h3><p>Drag the slider to see everyone’s time hours ahead. If you call at 9pm, what time is it for them?</p></div>
+      <div class="feat"><div class="icon" style="background:var(--morning-soft);color:var(--morning-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
+        <h3>Daylight saving warnings</h3><p>A heads-up before a friend’s clocks change, so a planned call doesn’t land an hour off.</p></div>
+      <div class="feat"><div class="icon" style="background:var(--afternoon-soft);color:var(--afternoon-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div>
+        <h3>Their holidays</h3><p>Public holidays in your friends’ countries, right where you plan. Add the call to your calendar in a tap.</p></div>
+      <div class="feat"><div class="icon" style="background:var(--night-soft);color:var(--night-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg></div>
+        <h3>Wake-up nudges</h3><p>An optional notification when a friend wakes up, only while you’re awake. Plus a reminder before each call.</p></div>
+      <div class="feat"><div class="icon" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.6 2.6 3 5.2"/></svg></div>
+        <h3>Groups</h3><p>Family, work, uni. Filter the list, the globe and the planner in one tap. Add friends straight from your contacts.</p></div>
+      <div class="feat"><div class="icon" style="background:var(--asleep-soft);color:var(--asleep-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg></div>
+        <h3>Made for you<span class="tag">Widget on Android</span></h3><p>Light and dark mode, four accent colours, 12 or 24-hour time, and a home-screen widget.</p></div>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <span class="kicker">In the app</span>
+    <h2>Calm, clear, and quick to read.</h2>
+    <div class="screens">
+      <figure><div class="phone"><img src="shots/clocks.webp" alt="The clock list" loading="lazy"></div><figcaption>Your people</figcaption></figure>
+      <figure><div class="phone"><img src="shots/plan.webp" alt="Planning a call" loading="lazy"></div><figcaption>Plan a call</figcaption></figure>
+      <figure><div class="phone"><img src="shots/globe.webp" alt="The globe" loading="lazy"></div><figcaption>The living globe</figcaption></figure>
+      <figure><div class="phone"><img src="shots/clocks-dark.webp" alt="Dark mode" loading="lazy"></div><figcaption>Dark mode</figcaption></figure>
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="private">
+      <div><span class="kicker">Private by design</span><h2>Your friends stay on your phone.</h2></div>
+      <ul>
+        <li><strong>No account</strong><span>Open it and start. There’s nothing to sign up for.</span></li>
+        <li><strong>No ads, no tracking</strong><span>No analytics, no ad networks, nothing sold.</span></li>
+        <li><strong>Stored only on your device</strong><span>Your friends and plans never leave your phone.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="wrap cta">
+    <img src="icon.png" alt="">
+    <h2>Call at the right time.</h2>
+    <div class="btns"><a class="btn solid" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.5.8.9.6L20.6 13a1 1 0 0 0 0-1.9L4.9 2.2c-.4-.2-.9.1-.9.6z"/></svg><span><small>Get it on</small>Google Play</span></a><span class="btn ghost"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg><span><small>Coming soon to the</small>App Store</span></span></div>
+  </div>
+</main>
+<footer><div class="wrap"><span class="brand"><img src="icon.png" alt="">Overlap</span><span>© 2026</span>
+<nav><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="support/">Support</a><a href="mailto:Vannan3926@gmail.com">Vannan3926@gmail.com</a></nav></div></footer>
+<script src="launch-globe.js"></script>
+<script src="site.js"></script>
+</body>
+</html>
