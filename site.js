@@ -34,7 +34,7 @@ function clockParts(zone, at = new Date()) {
 }
 function chip(part) {
   const p = PART[part];
-  return `<span class="chip" style="background:${p.soft};color:${p.deep}"><i style="background:${p.color}"></i>${p.label}</span>`;
+  return `<span class="pill" style="background:${p.soft};color:${p.deep}"><i style="background:${p.color}"></i>${p.label}</span>`;
 }
 // The app's day ring: the awake arc in the colour of their part of the day, and a dot for where they are in it.
 function ring(f, size, at = new Date()) {
@@ -44,23 +44,23 @@ function ring(f, size, at = new Date()) {
     <circle cx="${h}" cy="${h}" r="${r}" fill="none" stroke="var(--track)" stroke-width="3"/>
     <circle cx="${h}" cy="${h}" r="${r}" fill="none" stroke="${PART[part].color}" stroke-width="3" stroke-linecap="round"
       stroke-dasharray="${(c * (SLEEP - WAKE)) / 1440} ${c}" transform="rotate(${(WAKE / 1440) * 360 - 90} ${h} ${h})"/>
-    <circle cx="${x}" cy="${y}" r="4.5" fill="${PART[part].color}" stroke="var(--card)" stroke-width="2"/></svg>
+    <circle cx="${x}" cy="${y}" r="4.5" fill="${PART[part].color}" stroke="var(--ring-bg, var(--card))" stroke-width="2"/></svg>
     <b style="background:${f.av[0]};color:${f.av[1]};inset:${size * 0.16}px;font-size:${Math.round(size * 0.3)}px">${f.name[0]}</b></span>`;
 }
 
 // ---- Hero globe: the sun where it really is, friends pinned with their live time ----
 async function startGlobe() {
-  const canvas = document.getElementById("globe");
+  const canvas = document.getElementById("globe-canvas");
   if (!canvas || typeof makeGlobe !== "function") return;
   const now = new Date(), utcH = now.getUTCHours() + now.getUTCMinutes() / 60;
   const doy = (Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()) - Date.UTC(now.getUTCFullYear(), 0, 0)) / 864e5;
   const sun = { lat: ((23.44 * Math.sin((2 * Math.PI * (doy - 81)) / 365)) * Math.PI) / 180, lon: (-(utcH - 12) * 15 * Math.PI) / 180 };
   const globe = await makeGlobe(canvas, { tilt: 0.38, sun, day: "globe/earth-day.jpg", night: "globe/earth-night.jpg", flat: true });
-  const layer = document.getElementById("pins");
+  const layer = document.getElementById("pins"), space = canvas.closest(".space") || canvas;
   const pins = FRIENDS.map((f) => { const el = document.createElement("div"); el.className = "pin"; layer.appendChild(el); return { f, el }; });
   const paint = () => pins.forEach(({ f, el }) => {
     const { t, ap } = clockParts(f.zone);
-    el.innerHTML = `<span class="dot" style="background:${f.av[0]}"></span><span class="card">${ring(f, 30)}<span class="t">${t} ${ap}<small>${f.name} · ${f.city}</small></span>${chip(partAt(localMinutes(f.zone)))}</span>`;
+    el.innerHTML = `<span class="dot" style="background:${f.av[0]}"></span><span class="pin-card">${ring(f, 30)}<span class="t">${t} ${ap}<small>${f.name} · ${f.city}</small></span>${chip(partAt(localMinutes(f.zone)))}</span>`;
   });
   paint();
   setInterval(paint, 30000);
@@ -75,11 +75,15 @@ async function startGlobe() {
       if (last && !still) lon -= ((ts - last) / 1000) * 0.06;
       last = ts;
       globe.draw(lon);
-      const k = scale();
+      const k = scale(), sr = canvas.getBoundingClientRect(), fr = space.getBoundingClientRect();
+      const box = { left: fr.left - sr.left, right: fr.right - sr.left };  // the card's edges, in stage pixels
       pins.forEach(({ f, el }) => {
         const { x, y, nz } = globe.project(f.lat, f.lon, lon);
         el.style.opacity = Math.max(0, Math.min(1, (nz - 0.3) / 0.15));
-        el.classList.toggle("flip", x > globe.size * 0.6);
+        // Put the label on whichever side of the pin has room inside the dark card.
+        const card = el.lastElementChild, w = card ? card.offsetWidth + 24 : 0, px = x * k;
+        const fitsRight = px + w <= box.right, fitsLeft = px - w >= box.left;
+        el.classList.toggle("flip", fitsLeft && (!fitsRight || x > globe.size * 0.6));
         el.style.transform = `translate(${x * k}px, ${y * k}px)`;
       });
     }
@@ -91,7 +95,7 @@ async function startGlobe() {
 
 // ---- Clock cards ----
 function paintClocks() {
-  const row = document.getElementById("clocks");
+  const row = document.getElementById("clock-cards");
   if (!row) return;
   const now = new Date(), mine = localMinutes(MY_ZONE, now);
   row.innerHTML = FRIENDS.filter((f) => f.name !== "Amara").map((f) => {
@@ -100,7 +104,7 @@ function paintClocks() {
     return `<div class="clock" style="background:${p.soft};color:${p.deep}">
       <div class="top">${ring(f, 40, now)}<div><strong>${f.name}</strong><small>${f.city}</small></div></div>
       <div class="time">${t}<sup>${ap}</sup></div>
-      <div class="meta"><span>${off === 0 ? "Your time" : `${off > 0 ? "+" : "−"}${Math.abs(off)}h`}</span>${chip(partAt(m))}</div></div>`;
+      <div class="clock-foot"><span>${off === 0 ? "Your time" : `${off > 0 ? "+" : "−"}${Math.abs(off)}h`}</span>${chip(partAt(m))}</div></div>`;
   }).join("");
 }
 
@@ -137,6 +141,10 @@ function paintPlanner() {
   document.getElementById("best").textContent = `${at(bq)} – ${at(bq + 4)}`;
   document.getElementById("legend").innerHTML = Object.keys(PART).map(chip).join("");
 }
+
+// The day parts under the globe, as in the app's legend.
+const spaceLegend = document.getElementById("space-legend");
+if (spaceLegend) spaceLegend.innerHTML = Object.keys(PART).map(chip).join("");
 
 startGlobe();
 paintClocks();

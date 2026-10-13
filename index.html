@@ -8,102 +8,147 @@
 <meta property="og:title" content="Overlap: your friends' time, at a glance">
 <meta property="og:description" content="See your friends' local time, who's awake, and the best hour to call.">
 <meta property="og:image" content="https://beingmani.github.io/Overlap-releases/og.png">
-<meta name="theme-color" content="#07080c">
 <link rel="icon" href="icon.png">
+<link rel="stylesheet" href="studio.css">
 <link rel="stylesheet" href="site.css">
 </head>
 <body>
-<header class="hero">
-  <div class="wrap">
-    <nav class="nav"><a class="brand" href="./"><img src="icon.png" alt="">Overlap</a>
-      <div class="links"><a class="opt" href="#features">Features</a><a href="privacy/">Privacy</a><a href="support/">Support</a></div></nav>
-    <div class="hero-grid">
-      <div>
-        <span class="live"><b></b>The sun right now, on the real globe</span>
-        <h1>Know who’s <em>awake</em>, anywhere.</h1>
-        <p class="lede">Overlap shows your friends’ local time, where they are in their day, and the best hour to call.</p>
-        <div class="btns">
-          <a class="btn solid" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.5.8.9.6L20.6 13a1 1 0 0 0 0-1.9L4.9 2.2c-.4-.2-.9.1-.9.6z"/></svg><span><small>Get it on</small>Google Play</span></a>
-          <span class="btn ghost"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg><span><small>Coming soon to the</small>App Store</span></span>
-        </div>
-      </div>
-      <div class="stage"><canvas id="globe" width="600" height="600" aria-label="A globe showing where it is day and night right now, with friends pinned"></canvas><div id="pins"></div></div>
-    </div>
+<!-- Built by ../build.py, which fills in the nav, footer, icon sprite, store buttons and icons. -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></symbol><symbol id="i-chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h16"/></symbol><symbol id="i-globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol><symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol><symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></symbol><symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"/></symbol><symbol id="i-phone" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M11 18.5h2"/></symbol><symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol><symbol id="i-file" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8"/></symbol><symbol id="i-help" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol><symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol><symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol><symbol id="i-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></symbol><symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></symbol><symbol id="i-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.6 2.6 3 5.2"/></symbol><symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></symbol><symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol><symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol><symbol id="i-eyeoff" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5 12 5s9.5 7 9.5 7-3.5 7-9.5 7-9.5-7-9.5-7z"/><circle cx="12" cy="12" r="3"/><path d="M4 4l16 16"/></symbol><symbol id="i-gift" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="13" rx="2"/><path d="M12 8v13M3 12h18M12 8S10.5 3.5 8 4.5 9 8 12 8zM12 8s1.5-4.5 4-3.5S15 8 12 8z"/></symbol><symbol id="i-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7.5-4.5-7.5-10A4.5 4.5 0 0 1 12 7.5 4.5 4.5 0 0 1 19.5 10C19.5 15.5 12 20 12 20z"/></symbol><symbol id="i-bug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="7" width="10" height="13" rx="5"/><path d="M12 11v9M9 4l1.5 2.5M15 4l-1.5 2.5M3 12h4M17 12h4M4 18l3-2M20 18l-3-2M4 6l3 2M20 6l-3 2"/></symbol><symbol id="i-idea" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.4 1 1.1 1 1.8V16h5v-.3c0-.7.4-1.4 1-1.8A6 6 0 0 0 12 3z"/></symbol><symbol id="i-pen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol><symbol id="i-sunrise" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M5.6 7.6l1.4 1.4M18.4 7.6 17 9M2 18h20M7 18a5 5 0 0 1 10 0M5 22h14"/></symbol><symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol><symbol id="i-sunset" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9V3M9 6l3 3 3-3M2 18h20M7 18a5 5 0 0 1 10 0M5 22h14"/></symbol><symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9z"/></symbol><symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M4 2.8v18.4c0 .5.5.8.9.6L20.6 13a1 1 0 0 0 0-1.9L4.9 2.2c-.4-.2-.9.1-.9.6z"/></symbol><symbol id="i-apple" viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></symbol></svg>
+<header class="nav">
+  <a class="brand" href="./"><img src="icon.png" alt="">Overlap</a>
+  <nav class="navlinks" aria-label="Main"><a href="#features"><svg aria-hidden="true"><use href="#i-star"/></svg>Features</a><a href="#plan"><svg aria-hidden="true"><use href="#i-cal"/></svg>Plan a call</a><a href="#screens"><svg aria-hidden="true"><use href="#i-phone"/></svg>Screens</a><a href="privacy/"><svg aria-hidden="true"><use href="#i-shield"/></svg>Privacy</a><a href="support/"><svg aria-hidden="true"><use href="#i-help"/></svg>Support</a></nav>
+  <div class="navright">
+    <span class="divider"></span>
+    <a class="btn primary sm" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap">Get the app</a>
+    <details class="menu"><summary class="iconbtn" aria-label="Menu"><svg aria-hidden="true"><use href="#i-menu"/></svg></summary>
+      <div class="menu-panel"><a href="#features"><svg aria-hidden="true"><use href="#i-star"/></svg>Features</a><a href="#plan"><svg aria-hidden="true"><use href="#i-cal"/></svg>Plan a call</a><a href="#screens"><svg aria-hidden="true"><use href="#i-phone"/></svg>Screens</a><a href="privacy/"><svg aria-hidden="true"><use href="#i-shield"/></svg>Privacy</a><a href="support/"><svg aria-hidden="true"><use href="#i-help"/></svg>Support</a><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg aria-hidden="true"><use href="#i-play"/></svg>Get it on Google Play</a></div>
+    </details>
   </div>
 </header>
 
-<main>
-  <section class="wrap" id="features">
-    <div class="glance-head">
-      <div><span class="kicker">At a glance</span><h2>Everyone’s time, without the maths.</h2></div>
-      <p class="sub">Add the people you care about once. Overlap shows their time and whether they’re up, sorted west to east.</p>
+<div class="canvas">
+<main class="frame">
+
+  <!-- Hero: the pitch, then the live globe on its night sky -->
+  <section class="hero">
+    <span class="badge-pill">
+      <span class="stack">
+        <span style="color:var(--ink-morning)"><svg aria-hidden="true"><use href="#i-sunrise"/></svg></span>
+        <span style="color:var(--ink-afternoon)"><svg aria-hidden="true"><use href="#i-sun"/></svg></span>
+        <span style="color:var(--ink-evening)"><svg aria-hidden="true"><use href="#i-sunset"/></svg></span>
+        <span style="color:var(--ink-night)"><svg aria-hidden="true"><use href="#i-moon"/></svg></span>
+      </span>
+      Free on Android. No account, no ads.
+    </span>
+    <h1 class="display">Know who’s awake, anywhere.</h1>
+    <p class="lede">Overlap shows your friends’ local time, where they are in their day, and the best hour to call.</p>
+    <div class="actions"><a class="btn primary" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg aria-hidden="true"><use href="#i-play"/></svg>Get it on Google Play</a><span class="btn secondary soon"><svg aria-hidden="true"><use href="#i-apple"/></svg>App Store<small>Coming soon</small></span></div>
+    <nav class="chips" aria-label="In the app">
+      <a class="chip" href="#globe" style="--tint:var(--ink-night)"><svg aria-hidden="true"><use href="#i-globe"/></svg>Live globe</a>
+      <a class="chip" href="#clocks" style="--tint:var(--ink-morning)"><svg aria-hidden="true"><use href="#i-clock"/></svg>Friend clocks</a>
+      <a class="chip" href="#plan" style="--tint:var(--ink-afternoon)"><svg aria-hidden="true"><use href="#i-cal"/></svg>Plan a call</a>
+      <a class="chip" href="#features" style="--tint:var(--ink-evening)"><svg aria-hidden="true"><use href="#i-alert"/></svg>Daylight saving warnings</a>
+      <a class="chip" href="#features" style="--tint:var(--ink-morning)"><svg aria-hidden="true"><use href="#i-bell"/></svg>Wake-up nudges</a>
+      <a class="chip" href="#features" style="--tint:var(--ink-night)"><svg aria-hidden="true"><use href="#i-users"/></svg>Groups</a>
+      <a class="chip" href="#private" style="--tint:var(--ink-asleep)"><svg aria-hidden="true"><use href="#i-lock"/></svg>Private</a>
+    </nav>
+
+    <div class="space" id="globe">
+      <span class="live"><b></b>The sun right now, on the real globe</span>
+      <div class="stage"><canvas id="globe-canvas" width="600" height="600" aria-label="A globe showing where it is day and night right now, with friends pinned"></canvas><div id="pins"></div></div>
+      <div class="space-legend" id="space-legend"></div>
     </div>
-    <div class="clocks" id="clocks"></div>
-    <p class="note"><b>Live</b>These are the real times right now. Each card takes the colour of that friend’s part of the day.</p>
   </section>
 
-  <section class="wrap">
-    <div class="plan-head">
-      <span class="kicker">Plan a call</span>
-      <h2>Find the hour that works for everyone.</h2>
-      <p class="sub">Pick a day and see everyone’s day side by side. Overlap picks out the times when the most people are awake.</p>
+  <!-- At a glance: five live clock cards -->
+  <section class="block" id="clocks"><div class="inner">
+    <div class="section-head">
+      <div><span class="kicker">At a glance</span><h2>Everyone’s time, without the maths.</h2>
+        <p class="sub">Add the people you care about once. Overlap shows their time and whether they’re up, sorted west to east.</p></div>
+    </div>
+    <div class="clocks" id="clock-cards"></div>
+    <p class="note"><b>Live</b>These are the real times right now. Each card takes the colour of that friend’s part of the day.</p>
+  </div></section>
+
+  <!-- Plan a call: the planner on the visitor's own day -->
+  <section class="block tinted" id="plan"><div class="inner">
+    <div class="section-head">
+      <div><span class="kicker">Plan a call</span><h2>Find the hour that works for everyone.</h2>
+        <p class="sub">Pick a day and see everyone’s day side by side. Overlap picks out the times when the most people are awake.</p></div>
     </div>
     <div class="board">
       <div class="bhead"><h3>Today, in your time</h3><div class="best">Best time to call <b id="best"></b></div></div>
       <div class="lanes-grid" id="planner"></div>
       <div class="legend" id="legend"></div>
     </div>
-  </section>
+  </div></section>
 
-  <section class="wrap">
-    <span class="kicker">And the rest</span>
-    <h2>Small things that save a bad call.</h2>
-    <div class="grid">
-      <div class="feat"><div class="icon" style="background:var(--evening-soft);color:var(--evening-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+  <!-- Features -->
+  <section class="block" id="features"><div class="inner">
+    <div class="section-head">
+      <div><span class="kicker">And the rest</span><h2>Small things that save a bad call.</h2></div>
+    </div>
+    <div class="cards three">
+      <div class="card"><span class="icon" style="--tint:var(--ink-evening)"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>
         <h3>Time travel</h3><p>Drag the slider to see everyone’s time hours ahead. If you call at 9pm, what time is it for them?</p></div>
-      <div class="feat"><div class="icon" style="background:var(--morning-soft);color:var(--morning-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 17.6A2 2 0 0 0 4.1 20.6h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></div>
+      <div class="card"><span class="icon" style="--tint:var(--ink-morning)"><svg aria-hidden="true"><use href="#i-alert"/></svg></span>
         <h3>Daylight saving warnings</h3><p>A heads-up before a friend’s clocks change, so a planned call doesn’t land an hour off.</p></div>
-      <div class="feat"><div class="icon" style="background:var(--afternoon-soft);color:var(--afternoon-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg></div>
+      <div class="card"><span class="icon" style="--tint:var(--ink-afternoon)"><svg aria-hidden="true"><use href="#i-cal"/></svg></span>
         <h3>Their holidays</h3><p>Public holidays in your friends’ countries, right where you plan. Add the call to your calendar in a tap.</p></div>
-      <div class="feat"><div class="icon" style="background:var(--night-soft);color:var(--night-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21h4"/></svg></div>
+      <div class="card"><span class="icon" style="--tint:var(--ink-night)"><svg aria-hidden="true"><use href="#i-bell"/></svg></span>
         <h3>Wake-up nudges</h3><p>An optional notification when a friend wakes up, only while you’re awake. Plus a reminder before each call.</p></div>
-      <div class="feat"><div class="icon" style="background:var(--accent-soft);color:var(--accent)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.8-3.5 3.4-5.5 6.5-5.5s5.7 2 6.5 5.5M16 4.5a3.5 3.5 0 0 1 0 7M18.5 14.8c1.6.8 2.6 2.6 3 5.2"/></svg></div>
+      <div class="card"><span class="icon" style="--tint:var(--accent)"><svg aria-hidden="true"><use href="#i-users"/></svg></span>
         <h3>Groups</h3><p>Family, work, uni. Filter the list, the globe and the planner in one tap. Add friends straight from your contacts.</p></div>
-      <div class="feat"><div class="icon" style="background:var(--asleep-soft);color:var(--asleep-deep)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/><rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/></svg></div>
-        <h3>Made for you<span class="tag">Widget on Android</span></h3><p>Light and dark mode, four accent colours, 12 or 24-hour time, and a home-screen widget.</p></div>
+      <div class="card"><span class="icon" style="--tint:var(--ink-asleep)"><svg aria-hidden="true"><use href="#i-grid"/></svg></span>
+        <h3>Made for you</h3><p>Light and dark mode, four accent colours, 12 or 24-hour time, and a home-screen widget.</p><span class="tag">Widget on Android</span></div>
     </div>
-  </section>
+  </div></section>
 
-  <section class="wrap">
-    <span class="kicker">In the app</span>
-    <h2>Calm, clear, and quick to read.</h2>
+  <!-- Screens from the app -->
+  <section class="block tinted" id="screens"><div class="inner">
+    <div class="section-head">
+      <div><span class="kicker">In the app</span><h2>Calm, clear, and quick to read.</h2></div>
+      <a class="more" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap">Get it on Google Play <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
     <div class="screens">
-      <figure><div class="phone"><img src="shots/clocks.webp" alt="The clock list" loading="lazy"></div><figcaption>Your people</figcaption></figure>
-      <figure><div class="phone"><img src="shots/plan.webp" alt="Planning a call" loading="lazy"></div><figcaption>Plan a call</figcaption></figure>
-      <figure><div class="phone"><img src="shots/globe.webp" alt="The globe" loading="lazy"></div><figcaption>The living globe</figcaption></figure>
-      <figure><div class="phone"><img src="shots/clocks-dark.webp" alt="Dark mode" loading="lazy"></div><figcaption>Dark mode</figcaption></figure>
+      <figure class="phone"><img src="shots/clocks.webp" alt="The clock list" loading="lazy"><figcaption>Your people</figcaption></figure>
+      <figure class="phone"><img src="shots/plan.webp" alt="Planning a call" loading="lazy"><figcaption>Plan a call</figcaption></figure>
+      <figure class="phone"><img src="shots/globe.webp" alt="The globe" loading="lazy"><figcaption>The living globe</figcaption></figure>
+      <figure class="phone"><img src="shots/clocks-dark.webp" alt="Dark mode" loading="lazy"><figcaption>Dark mode</figcaption></figure>
     </div>
-  </section>
+  </div></section>
 
-  <section class="wrap">
-    <div class="private">
+  <!-- Privacy -->
+  <section class="block" id="private"><div class="inner">
+    <div class="section-head">
       <div><span class="kicker">Private by design</span><h2>Your friends stay on your phone.</h2></div>
-      <ul>
-        <li><strong>No account</strong><span>Open it and start. There’s nothing to sign up for.</span></li>
-        <li><strong>No ads, no tracking</strong><span>No analytics, no ad networks, nothing sold.</span></li>
-        <li><strong>Stored only on your device</strong><span>Your friends and plans never leave your phone.</span></li>
-      </ul>
+      <a class="more" href="privacy/">Read the Privacy Policy <svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </div>
-  </section>
+    <div class="cards three">
+      <div class="card"><span class="icon" style="--tint:var(--ink-morning)"><svg aria-hidden="true"><use href="#i-box"/></svg></span>
+        <h3>No account</h3><p>Open it and start. There’s nothing to sign up for.</p></div>
+      <div class="card"><span class="icon" style="--tint:var(--ink-night)"><svg aria-hidden="true"><use href="#i-eyeoff"/></svg></span>
+        <h3>No ads, no tracking</h3><p>No analytics, no ad networks, nothing sold.</p></div>
+      <div class="card"><span class="icon" style="--tint:var(--ink-afternoon)"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>
+        <h3>Stored only on your device</h3><p>Your friends and plans never leave your phone.</p></div>
+    </div>
+    <div class="cta-strip">
+      <p><strong>Call at the right time.</strong> Free, no account, no ads. The App Store version is coming soon.</p>
+      <a class="btn primary" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg aria-hidden="true"><use href="#i-play"/></svg>Get it on Google Play</a>
+    </div>
+  </div></section>
 
-  <div class="wrap cta">
-    <img src="icon.png" alt="">
-    <h2>Call at the right time.</h2>
-    <div class="btns"><a class="btn solid" href="https://play.google.com/store/apps/details?id=com.beingbriston.overlap"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4 2.8v18.4c0 .5.5.8.9.6L20.6 13a1 1 0 0 0 0-1.9L4.9 2.2c-.4-.2-.9.1-.9.6z"/></svg><span><small>Get it on</small>Google Play</span></a><span class="btn ghost"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9 0 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg><span><small>Coming soon to the</small>App Store</span></span></div>
-  </div>
 </main>
-<footer><div class="wrap"><span class="brand"><img src="icon.png" alt="">Overlap</span><span>© 2026</span>
-<nav><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="support/">Support</a><a href="mailto:Vannan3926@gmail.com">Vannan3926@gmail.com</a></nav></div></footer>
+</div>
+
+<footer class="site">
+  <nav class="cols" aria-label="Site"><div><span class="kicker">App</span><ul><li><a href="#globe"><span class="thumb" style="--tint:var(--ink-night)"><svg aria-hidden="true"><use href="#i-globe"/></svg></span>Live globe</a></li><li><a href="#clocks"><span class="thumb" style="--tint:var(--ink-morning)"><svg aria-hidden="true"><use href="#i-clock"/></svg></span>Friend clocks</a></li><li><a href="#plan"><span class="thumb" style="--tint:var(--ink-afternoon)"><svg aria-hidden="true"><use href="#i-cal"/></svg></span>Plan a call</a></li><li><a href="#screens"><span class="thumb" style="--tint:var(--ink-evening)"><svg aria-hidden="true"><use href="#i-phone"/></svg></span>Screens</a></li></ul></div><div><span class="kicker">Help</span><ul><li><a href="support/"><span class="thumb" style="--tint:var(--accent)"><svg aria-hidden="true"><use href="#i-help"/></svg></span>Support</a></li><li><a href="mailto:Vannan3926@gmail.com"><span class="thumb" style="--tint:var(--ink-evening)"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>Vannan3926@gmail.com</a></li></ul></div><div><span class="kicker">Legal</span><ul><li><a href="privacy/"><span class="thumb" style="--tint:var(--accent)"><svg aria-hidden="true"><use href="#i-shield"/></svg></span>Privacy Policy</a></li><li><a href="terms/"><span class="thumb" style="--tint:var(--ink-asleep)"><svg aria-hidden="true"><use href="#i-file"/></svg></span>Terms of Use</a></li></ul></div><div><span class="kicker">More apps</span><ul><li><a href="https://beingmani.github.io/Pulse-releases/"><span class="thumb" style="--tint:var(--t-red)"><svg aria-hidden="true"><use href="#i-pen"/></svg></span>Pulse</a></li></ul></div></nav>
+  <div class="bar">
+    <div class="left"><a class="brand" href="./"><img src="icon.png" alt="">Overlap</a><span class="tagline">Your friends' time, at a glance</span></div>
+    <nav aria-label="Legal"><a href="privacy/">Privacy</a><a href="terms/">Terms</a><a href="support/">Support</a><span class="meta">© 2026</span></nav>
+  </div>
+</footer>
 <script src="launch-globe.js"></script>
 <script src="site.js"></script>
 </body>
